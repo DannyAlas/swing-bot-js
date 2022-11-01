@@ -28,10 +28,12 @@ package-docker:
   services:
     - docker:20.10.20-dind
   script:
-    - docker login -u $CI_DEPLOY_USER -p $DOCKER_DEPLOY $CI_REGISTRY
+    - docker login  $CI_REGISTRY
+    - $CI_DEPLOY_USER
+    - $DOCKER_DEPLOY
     - docker build . -t $CI_REGISTRY_IMAGE:$APP_VERSION
     - docker image ls
-    - docker push --all-tags $CI_REGISTRY_IMAGE
+    - docker push $CI_REGISTRY_IMAGE:$APP_VERSION
 
 deploy-to-prod:
   image: 

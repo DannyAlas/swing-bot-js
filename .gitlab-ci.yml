@@ -13,8 +13,7 @@ build-job:
   script:
     - echo "BUILDING"
     - npm install
-    - nmp
-    - echo "Compile complete."
+    - echo "Build complete."
 
 deploy:
   stage: deploy
@@ -24,3 +23,4 @@ deploy:
   script:
     - docker build . -t $CI_REGISTRY_IMAGE -t $CI_REGISTRY_IMAGE:$APP_VERSION .
     - docker image ls
+

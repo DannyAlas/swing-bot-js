@@ -1,0 +1,31 @@
+const { EmbedBuilder } = require('discord.js');
+
+module.exports = {
+    name: 'queue',
+    description: 'Get the songs in the queue',
+    voiceChannel: true,
+
+    execute({ client, inter }) {
+        const queue = player.getQueue(inter.guildId);
+
+        if (!queue) return inter.reply({ content: `No music currently playing`, ephemeral: true });
+
+        if (!queue.tracks[0]) return  inter.reply({ content: `Only the current song is in the queue`, ephemeral: true });
+
+        const methods = ['', '🔁', '🔂'];
+
+        const songs = queue.tracks.length;
+
+        const nextSongs = songs > 5 ? `Plus **${songs - 5}** more songs...` : `In the playlist **${songs}** song(s)...`;
+
+        const tracks = queue.tracks.map((track, i) => `**${i + 1}** - ${track.title} | ${track.author} (requested by : **${track.requestedBy.username}**)`)
+
+        const embed = new EmbedBuilder()
+        .setColor('#ff0000')
+        .setThumbnail(inter.guild.iconURL({ size: 2048, dynamic: true }))
+        .setAuthor({name: `Server queue - ${inter.guild.name} ${methods[queue.repeatMode]}`})
+        .setDescription(`**Playing:** ${queue.current.title}\n\n${tracks.slice(0, 5).join('\n')}\n\n${nextSongs}`)
+        .setTimestamp()
+        inter.reply({ embeds: [embed] });
+    },
+};

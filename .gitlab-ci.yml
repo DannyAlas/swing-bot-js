@@ -13,6 +13,7 @@ test:
     - chmod +x ./setup_env.sh
     - ./setup_env.sh
     - cat config.js
+    - echo $TOKEN
 
 build-job:
   stage: build

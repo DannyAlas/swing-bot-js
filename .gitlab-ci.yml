@@ -7,14 +7,14 @@ stages:
 variables:
   APP_VERSION: $CI_PIPELINE_IID
 
-test:
+.test:
   stage: test
   script:
     - chmod +x ./setup_env.sh
     - ./setup_env.sh
     - cat config.js
 
-build-job:
+.build-job:
   stage: build
   image: node:latest
   script:
@@ -29,8 +29,8 @@ package-docker:
     - docker:20.10.20-dind
   script:
     - docker login  $CI_REGISTRY
-    - $CI_DEPLOY_USER
-    - $DOCKER_DEPLOY
+    - echo $CI_DEPLOY_USER 
+    - echo $DOCKER_DEPLOY
     - docker build . -t $CI_REGISTRY_IMAGE:$APP_VERSION
     - docker image ls
     - docker push $CI_REGISTRY_IMAGE:$APP_VERSION

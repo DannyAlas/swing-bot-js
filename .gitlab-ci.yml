@@ -10,6 +10,7 @@ test:
 
 build-job:
   stage: build
+  image: npm:latest
   script:
     - echo "BUILDING"
     - npm install

@@ -29,7 +29,7 @@ package-docker:
   script:
     - echo docker login
     - echo $CI_REGISTRY_USER
-    - echo $CI_REGISTRY_PASSWORD | --password-stdin
+    - echo $CI_REGISTRY_PASSWORD 
     - docker build . -t $CI_REGISTRY_IMAGE
     - docker image ls
     - docker push --all-tags $CI_REGISTRY_IMAGE

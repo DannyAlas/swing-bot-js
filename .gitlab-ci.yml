@@ -29,9 +29,6 @@ package-docker:
   services:
     - docker:20.10.20-dind
   script:
-    - chmod +x ./setup_env.sh
-    - ./setup_env.sh
-    - cat config.js
     - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
     - docker build . -t $CI_REGISTRY_IMAGE:$APP_VERSION -t $CI_REGISTRY_IMAGE .
     - docker image ls

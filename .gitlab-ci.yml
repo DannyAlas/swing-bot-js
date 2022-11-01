@@ -1,10 +1,18 @@
 stages:
+  - init          
   - build
   - package
   - deploy
 
 variables:
   APP_VERSION: $CI_PIPELINE_IID
+
+test:
+  stage: init
+  script:
+    - chmod +x ./setup_env.sh
+    - ./setup_env.sh
+    - cat config.js
 
 build-job:
   stage: build

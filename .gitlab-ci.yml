@@ -6,6 +6,7 @@ stages:
 test:
   stage: test
   script:
+    - echo "$TOKEN"
     - cat config.js
 
 build-job:

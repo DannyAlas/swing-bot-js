@@ -7,14 +7,14 @@ stages:
 variables:
   APP_VERSION: $CI_PIPELINE_IID
 
-.test:
+test:
   stage: test
   script:
     - chmod +x ./setup_env.sh
     - ./setup_env.sh
     - cat config.js
 
-.build-job:
+build-job:
   stage: build
   image: node:latest
   script:
@@ -51,5 +51,5 @@ deploy-to-prod:
     - cat auth.json
     - aws s3 cp Dockerrun.aws.json s3://$AWS_S3_BUCKET/Dockerrun.aws.json
     - aws s3 cp auth.json s3://$AWS_S3_BUCKET/auth.json
-    - aws elasticbeanstock create-application-version --application-name "$APP_NAME" --version-label "$APP_VERSION" --source-bundle S3Bucket=$AWS_S3_BUCKET,S3Key=Dockerrun.aws.json
-    - aws elasticbeanstock update-environment --application-name "$APP_NAME" --version-label "$APP_VERSION" --environment-name "$APP_ENV_NAME"
+    - aws elasticbeanstalk create-application-version --application-name "$APP_NAME" --version-label "$APP_VERSION" --source-bundle S3Bucket=$AWS_S3_BUCKET,S3Key=Dockerrun.aws.json
+    - aws elasticbeanstalk update-environment --application-name "$APP_NAME" --version-label "$APP_VERSION" --environment-name "$APP_ENV_NAME"

@@ -1,18 +1,10 @@
 stages:
-  - test          
   - build
   - package
   - deploy
 
 variables:
   APP_VERSION: $CI_PIPELINE_IID
-
-test:
-  stage: test
-  script:
-    - chmod +x ./setup_env.sh
-    - ./setup_env.sh
-    - cat config.js
 
 build-job:
   stage: build
@@ -28,6 +20,9 @@ package-docker:
   services:
     - docker:20.10.20-dind
   script:
+    - chmod +x ./setup_env.sh
+    - ./setup_env.sh
+    - cat config.js
     - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
     - docker build . -t $CI_REGISTRY_IMAGE:$APP_VERSION
     - docker image ls
@@ -51,5 +46,6 @@ deploy-to-prod:
     - cat auth.json
     - aws s3 cp Dockerrun.aws.json s3://$AWS_S3_BUCKET/Dockerrun.aws.json
     - aws s3 cp auth.json s3://$AWS_S3_BUCKET/auth.json
-    - aws elasticbeanstalk create-application-version --application-name "$APP_NAME" --version-label "$APP_VERSION" --source-bundle S3Bucket=$AWS_S3_BUCKET,S3Key=Dockerrun.aws.json
-    - aws elasticbeanstalk update-environment --application-name "$APP_NAME" --version-label "$APP_VERSION" --environment-name "$APP_ENV_NAME"
+    - aws elasticbeanstalk create-application-version --application-name "$APP_NAME" --version-label $APP_VERSION --source-bundle S3Bucket=$AWS_S3_BUCKET,S3Key=Dockerrun.aws.json
+    - aws elasticbeanstalk update-environment --application-name "$APP_NAME" --version-label $APP_VERSION --environment-name $APP_ENV_NAME
+    - aws elasticbeanstalk wait environment-updated --application-name "$APP_NAME" --version-label $APP_VERSION --environment-name $APP_ENV_NAME

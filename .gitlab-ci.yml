@@ -6,7 +6,8 @@ stages:
 test:
   stage: test
   script:
-    - echo $TOKEN
+    - chmod +x ./setup_env.sh
+    - ./setup_env.sh
     - cat config.js
 
 build-job:

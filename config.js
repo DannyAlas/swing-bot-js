@@ -1,6 +1,7 @@
+require('dotenv').config()
 module.exports = {
     app: {
-        token: '${TOKEN}',
+        token: JSON.stringify(process.env.ENV_TOKEN),
         playing: 'by Jazzy',
         global: true,
         guild: '762098988592791552'

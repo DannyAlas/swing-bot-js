@@ -1,0 +1,11 @@
+{
+    "AWSEBDockerrunVersion": "1",
+    "Image": {
+        "Name": "$CI_REGISTRY_IMAGE",
+        "Update": "true"
+    },
+    "Authentication": {
+        "Bucket": "elasticbeanstalk-us-west-1-953489246867",
+        "Key": "auth.json"
+    }
+}

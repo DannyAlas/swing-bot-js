@@ -2,6 +2,7 @@ stages:
   - test          
   - build
   - package
+  - deploy
 
 variables:
   APP_VERSION: $CI_PIPELINE_IID
@@ -27,10 +28,25 @@ package-docker:
   services:
     - docker:20.10.20-dind
   script:
-    - echo docker login
+    - echo docker login $CI_REGISTRY
     - echo $CI_REGISTRY_USER
     - echo $CI_REGISTRY_PASSWORD 
-    - docker build . -t $CI_REGISTRY_IMAGE
+    - docker build . -t $CI_REGISTRY_IMAGE:$APP_VERSION
     - docker image ls
-    - docker push --all-tags $CI_REGISTRY_IMAGE
+    - docker push --all-tags $CI_REGISTRY_IMAGE:$APP_VERSION
 
+deploy-to-prod:
+  image: 
+    name: amazon/aws-cli:2.4.11
+    entrypoint: [""]
+  stage: deploy
+  script:
+    - aws --version
+    - yum install -y gettext
+    - export DEPLOY_TOKEN=$(echo $GITLAB_DEPLOY_TOKEN | td -d "/n" | base64)
+    - envsubst < auths/Dockerrun.aws.json > Dockerrun.aws.json
+    - envsubst < auths/auth.json > auth.json
+    - cat Dockerrun.aws.json
+    - cat auth.json
+    - aws s3 cp Dockerrun.aws.json s3://$AWS_S3_BUCKET/Dockerrun.aws.json
+    - aws s3 cp auth.json s3://$AWS_S3_BUCKET/auth.json

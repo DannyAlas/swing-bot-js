@@ -28,7 +28,7 @@ package-docker:
   services:
     - docker:20.10.20-dind
   script:
-    - docker login - u $CI_DEPLOY_USER --password-stdin $DOCKER_DEPLOY
+    - echo "$DOCKER_DEPLOY" | docker login --username $CI_DEPLOY_USER --password-stdin
     - docker build . -t $CI_REGISTRY_IMAGE:$APP_VERSION
     - docker image ls
     - docker push $CI_REGISTRY_IMAGE:$APP_VERSION

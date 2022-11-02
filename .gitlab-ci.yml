@@ -48,8 +48,10 @@ deploy-to-prod:
     - export DEPLOY_TOKEN=$(echo $GITLAB_DEPLOY_TOKEN | tr -d "/n" | base64)
     - envsubst < auths/Dockerrun.aws.json > Dockerrun.aws.json
     - envsubst < auths/auth.json > auth.json
+    - envsubst < auths/options.json > options.json
     - cat Dockerrun.aws.json
     - cat auth.json
+    - cat options.json
     - aws s3 cp Dockerrun.aws.json s3://$AWS_S3_BUCKET/Dockerrun.aws.json
     - aws s3 cp auth.json s3://$AWS_S3_BUCKET/auth.json
     - aws s3 cp options.json s3://$AWS_S3_BUCKET/options.json

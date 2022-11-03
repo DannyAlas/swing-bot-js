@@ -31,7 +31,7 @@ deploy-to-prod:
   stage: deploy
   variables:
     APP_NAME: swing-bot
-    APP_ENV_NAME: Swingbot-envs
+    APP_ENV_NAME: Swingbot-env
   script:
     - aws --version
     - yum install -y gettext

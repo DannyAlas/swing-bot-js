@@ -3,7 +3,7 @@ const path = require('path');
 require('dotenv').config({ path: path.resolve(__dirname, '.env') })
 module.exports = {
     app: {
-        token: process.env['TOKEN'],
+        token: process.env.TOKEN,
         playing: 'Jazz',
         global: true,
         guild: '762098988592791552'

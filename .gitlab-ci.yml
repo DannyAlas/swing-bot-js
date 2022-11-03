@@ -24,7 +24,7 @@ package-docker:
     - docker:20.10.20-dind
   script:
     - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
-    - docker build --build-arg arg_token=$TOKEN -t $CI_REGISTRY_IMAGE -t $CI_REGISTRY_IMAGE:$APP_VERSION . --build-arg TOKEN=$TOKEN
+    - docker build --build-arg TOKEN=$TOKEN -t $CI_REGISTRY_IMAGE -t $CI_REGISTRY_IMAGE:$APP_VERSION . --build-arg TOKEN=$TOKEN
     - docker image ls
     - docker push --all-tags $CI_REGISTRY_IMAGE
 

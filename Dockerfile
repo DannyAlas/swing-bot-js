@@ -1,7 +1,7 @@
 FROM node:latest
 ARG TOKEN
 WORKDIR /usr/src/app
-ENV PATH /app/node_modules/.bin:$PATH
+ENV TOKEN=$TOKEN
 
 COPY package*.json ./
 

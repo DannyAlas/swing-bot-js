@@ -1,6 +1,7 @@
 const { Player } = require('discord-player');
 const { Client, GatewayIntentBits } = require('discord.js');
-
+const dotenv = require("dotenv").config();
+console.log(process.env.ENV_TOKEN);
 global.client = new Client({
     intents: [
         GatewayIntentBits.Guilds,
@@ -18,5 +19,4 @@ global.player = new Player(client, client.config.opt.discordPlayer);
 
 require('./src/loader');
 require('./src/events');
-console.log(process.env.ENV_TOKEN)
 client.login(client.config.app.token);

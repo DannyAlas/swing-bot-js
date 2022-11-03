@@ -11,11 +11,7 @@ build-job:
   image: node:latest
   script:
     - echo "BUILDING"
-    - echo $ENV_FILE
-    - cp $ENV_FILE .env
-    - cat .env
     - npm install
-    - echo "Build complete."
 
 package-docker:
   stage: package
@@ -35,7 +31,7 @@ deploy-to-prod:
   stage: deploy
   variables:
     APP_NAME: swing-bot
-    APP_ENV_NAME: Swingbot-env
+    APP_ENV_NAME: Swingbot-envs
   script:
     - aws --version
     - yum install -y gettext

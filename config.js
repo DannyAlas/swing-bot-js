@@ -3,7 +3,7 @@ dotenv.config()
 
 module.exports = {
     app: {
-        token: process.env.ENV_TOKEN,
+        token: process.env['ENV_TOKEN'],
         playing: 'Jazz',
         global: true,
         guild: '762098988592791552'

@@ -1,5 +1,6 @@
 const dotenv = require("dotenv").config();
-
+const path = require('path');
+require('dotenv').config({ path: path.resolve(__dirname, '.env') })
 module.exports = {
     app: {
         token: process.env['ENV_TOKEN'],

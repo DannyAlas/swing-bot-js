@@ -6,7 +6,7 @@ module.exports = {
     options: [
         {
             name: 'amount',
-            type: ApplicationCommandOptionType.String,
+            type: ApplicationCommandOptionType.Integer,
             description: 'number of messages to delete',
             min_value: 1,
             required: true,

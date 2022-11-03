@@ -2,7 +2,7 @@ FROM node:latest
 
 # Create app directory
 WORKDIR /usr/src/app
-ENV ENV_TOKEN=$arg_token
+ENV PATH /app/node_modules/.bin:$PATH
 # Install app dependencies
 # A wildcard is used to ensure both package.json AND package-lock.json are copied
 # where available (npm@5+)

@@ -3,8 +3,8 @@ dotenv.config()
 
 module.exports = {
     app: {
-        token: 'MTAzNDQ2NzcxMjMwNDQzNTIwMA.GYZ2mf.IPgkVfqen7_xWHmQLbT7edtLFYe9iEiT8i_y1I',
-        playing: 'by Jazzy',
+        token: $ENV_TOKEN,
+        playing: 'Jazz',
         global: true,
         guild: '762098988592791552'
     },
@@ -15,7 +15,7 @@ module.exports = {
             roleName: '',
             commands: []
         },
-        maxVol: 100,
+        maxVol: 110,
         leaveOnEnd: true,
         loopMessage: false,
         spotifyBridge: true,

@@ -1,5 +1,4 @@
 stages:
-  - init          
   - build
   - package
   - deploy
@@ -7,19 +6,13 @@ stages:
 variables:
   APP_VERSION: $CI_PIPELINE_IID
 
-test:
-  stage: init
-  script:
-    - chmod +x ./setup_env.sh
-    - ./setup_env.sh
-    - cat config.js
-    - echo $TOKEN
-
 build-job:
   stage: build
   image: node:latest
   script:
     - echo "BUILDING"
+    - echo $ENV_FILE
+    - cp $ENV_FILE .env
     - npm install
     - echo "Build complete."
 
@@ -31,7 +24,6 @@ package-docker:
   script:
     - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
     - docker build --build-arg arg_token=$TOKEN -t $CI_REGISTRY_IMAGE -t $CI_REGISTRY_IMAGE:$APP_VERSION .
-    - echo $TOKEN
     - docker image ls
     - docker push --all-tags $CI_REGISTRY_IMAGE
 

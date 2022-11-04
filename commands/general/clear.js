@@ -13,7 +13,7 @@ module.exports = {
         }
     ],
     async execute({ inter }) {
-        const amount = inter.options.getString('amount');
+        const amount = inter.options.getInteger('amount');
         await inter.channel.bulkDelete(amount, true);
         await inter.reply({ content: `Deleted ${amount} messages!`, ephemeral: true});
 

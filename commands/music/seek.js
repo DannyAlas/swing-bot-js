@@ -9,7 +9,7 @@ module.exports = {
     {
         name: 'time',
         description: 'time that you want to fast forward or rewind',
-        type: ApplicationCommandOptionType.String,
+        type: ApplicationCommandOptionType.Number,
         required: true,
     }
     ],
@@ -18,7 +18,7 @@ module.exports = {
 
         if (!queue || !queue.playing) return inter.reply({ content: `No music currently playing ${inter.reply}`, ephemeral: true });
 
-        const timeToMS = ms(inter.options.getString('time'));
+        const timeToMS = ms(inter.options.getNumber('time'));
 
         if (timeToMS >= queue.current.durationMS) return inter.reply({ content:`The indicated time is higher than the total time left ${inter.member}\n*Try for example a valid time like **5s, 10s, 20 seconds, 1m**...*`, ephemeral: true });
 

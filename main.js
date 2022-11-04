@@ -10,7 +10,6 @@ global.client = new Client({
         GatewayIntentBits.GuildVoiceStates,
         GatewayIntentBits.MessageContent
     ],
-   disableMentions: 'everyone',
 });
 
 client.config = require('./config');

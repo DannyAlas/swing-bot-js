@@ -14,7 +14,6 @@ module.exports = {
         .addFields([ { name: `use \`/\` to pop up the command helper`, value: commands.map(x => `\`${x.name}\``).join(' | ') } ])
         .setFooter({ text: `Requested by ${inter.user.username}`, })
 
-
         inter.reply({ embeds: [embed] });
     },
 };

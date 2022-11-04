@@ -1,4 +1,3 @@
-const dotenv = require("dotenv").config();
 const path = require('path');
 require('dotenv').config({ path: path.resolve(__dirname, '.env') })
 module.exports = {
@@ -15,11 +14,11 @@ module.exports = {
             roleName: '',
             commands: []
         },
-        maxVol: 110,
+        maxVol: 150,
         leaveOnEnd: true,
         loopMessage: false,
         spotifyBridge: true,
-        defaultvolume: 75,
+        defaultvolume: 100,
         discordPlayer: {
             ytdlOptions: {
                 quality: 'highestaudio',

@@ -5,7 +5,6 @@ module.exports = {
         token: process.env.TOKEN,
         playing: 'Jazz',
         global: true,
-        guild: '762098988592791552'
     },
 
     opt: {
@@ -15,7 +14,7 @@ module.exports = {
             commands: []
         },
         maxVol: 150,
-        leaveOnEnd: true,
+        leaveOnEnd: false,
         loopMessage: false,
         spotifyBridge: true,
         defaultvolume: 100,
